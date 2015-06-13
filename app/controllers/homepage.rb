@@ -36,7 +36,7 @@ end
 post '/notes' do
   p "[LOG] you've reached POST /notes "
   p "[LOG] your params are: #{params.inspect}"
-  new_note = Note.new(message: params[:message])
+  new_note = Note.new(message: params[:message], user_id: session[:user_id])
   new_address = Receiver.new(params[:address])
   if new_note.save && new_address.save
     p "[LOG] Note and address saved"
