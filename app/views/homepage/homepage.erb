@@ -3,5 +3,17 @@
 
  <form id="new_note" action="/notes" method="post">
     <textarea class='note_form' name="message" placeholder="Write a note"></textarea>
-    <input type="submit" value="Send">
+    <input class='address_field' name="address[street_address]" placeholder="1234"></input>
+    <input class='address_field' name="address[street_name]" placeholder="Street Name"></input>
+    <input class='address_field' name="address[city]" placeholder="City"></input>
+    <input class='address_field' name="address[state]" placeholder="State"></input>
+    <input class='address_field' name="address[zip_code]" placeholder="Zip Code"></input>
+    <input class='address_field' name="address[country]" placeholder="country"></input>
+
+    <input type="submit" value="Send!">
+
   </form>
+
+
+
+
