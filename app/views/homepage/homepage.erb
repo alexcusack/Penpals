@@ -1,5 +1,10 @@
 <h1>Welcome to Notes</h1>
+<%if @current_user %>
+  <h1>Welcome back, <%= @current_user.username %></h1>
+  <a href="/<%= @current_user.id %>">Go to my profile</a>
+<% end %>
 
+<h3>Want to write a new note?</h3>
 
  <form id="new_note" action="/notes" method="post">
     <textarea class='note_form' name="message" placeholder="Write a note"></textarea>

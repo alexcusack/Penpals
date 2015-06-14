@@ -1,0 +1,15 @@
+<h1>Profile</h1>
+<h2>User: <%= @current_user.username %> </h2>
+<h3>Total notes sent: <%= @current_user.notes.count %></h3>
+
+<h4>Here are the notes you've sent</h4>
+<ol>
+  <% @notes.each do |note| %>
+    <li><%= p note.message %>
+      <form action="delete/<%= note.id %>" method="POST">
+        <input name="_method" type="hidden" value="delete" />
+        <input type="submit" value="delete">
+      </form>
+    </li>
+  <% end  %>
+</ol>
