@@ -15,8 +15,8 @@
 </ol>
 
 
-<h2>Your address information</h2>
-<% address = Receiver.where(id: @current_user.id).first %>
+<h[2>Your address information</h2>
+<% address = Receiver.where(user_id: @current_user.id).first %>
 
 <form id="new_note" action="/updateaddress" method="POST">
     <input name="_method" type="hidden" value="put" />
@@ -32,4 +32,5 @@
   </form>
 
 
-<p><a href="/logout">Logout</a></p>
+<p><a href="/logout">Logout</a></p><br>
+<p><a href="/">Home</a></p>

@@ -30,10 +30,13 @@ post '/signup' do
       p "[LOG] User saved"
       session[:user_id] = new_user.id
       redirect '/'
+    else
+      @errors = new_user.errors
+      erb :"homepage/login_signup"
     end
   else
     p "[LOG] User not saved"
-    @errors = ["Be sure to fill in all the fields and match the passwords"]
+    @errors = ["Passwords need to match!"]
     erb :"homepage/login_signup"
   end
 end
@@ -46,16 +49,17 @@ end
 post '/notes' do
   p "[LOG] you've reached POST /notes "
   p "[LOG] your params are: #{params.inspect}"
-  p "#{params[:user_id].to_i}"
   new_note = Note.new(message: params[:message], user_id: session[:user_id])
   new_address = Receiver.new(params[:address])
+  new_address.user_id = session[:user_id]
   if new_address.save && new_note.save
     p "[LOG] Note and address saved"
     redirect "notes/#{new_note.id}"
   else
     p "[LOG] Note and address NOT saved"
-    p "#{new_note.errors.messages}"
-    p "#{new_address.errors.messages}"
+    @errors = "#{new_note.errors.messages}" + "#{new_address.errors.messages}"
+    @current_user = User.find(session[:user_id])
+    erb :"/homepage/homepage"
   end
 end
 
@@ -77,7 +81,9 @@ end
 
 put '/updateaddress' do
 p "[LOG] hit address route"
- new_address = Receiver.where(user_id: params[:address][:user_id]).first
+ new_address = Receiver.where(user_id: session[:user_id]).first
+p "#{session[:user_id]}"
+p "#{new_address}"
  if new_address
   p "[LOG] address found"
   new_address.update_attributes(params[:address])

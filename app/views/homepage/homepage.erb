@@ -5,12 +5,16 @@
   <% else %>
    <p><a href="">Login</a></p>
 <% end %>
-
+<br>
+<% if @errors %>
+<%= @errors %>
+<% end %>
 
 <h3>Want to write a new note?</h3>
 
-<% address = Receiver.where(id: @current_user.id).first %>
- <form id="new_note" action="/notes" method="post">
+<% address = Receiver.where(user_id: @current_user.id).first %>
+<% if address %>
+  <form id="new_note" action="/notes" method="post">
     <textarea class='note_form' name="message" placeholder="Write a note"></textarea>
     <p> Your address</p>
     <input class='address_field' name="address[street_address]" placeholder="1234" value="<%= address.street_address %>"</input><br>
@@ -19,11 +23,22 @@
     <input class='address_field' name="address[state]" placeholder="State" value="<%= address.state %>" </input><br>
     <input class='address_field' name="address[zip_code]" placeholder="Zip Code" value="<%= address.zip_code %>" </input><br>
     <input class='address_field' name="address[country]" placeholder="country" value="<%= address.country %>" </input><br>
-    <input class='address_field' name="address[country]" placeholder="country" value="<%= @current_user.id %>"  </input><br>
-    <input name="address[user_id]" type="hidden" value="<%= @current_user.id %>"  </input><br>
     <input type="submit" value="Send!">
-
   </form>
+<% else %>
+  <form id="new_note" action="/notes" method="post">
+    <textarea class='note_form' name="message" placeholder="Write a note"></textarea>
+    <p> Your address</p>
+    <input class='address_field' name="address[street_address]" placeholder="1234" </input><br>
+    <input class='address_field' name="address[street_name]" placeholder="Street Name" </input><br>
+    <input class='address_field' name="address[city]" placeholder="City" </input><br>
+    <input class='address_field' name="address[state]" placeholder="State" </input><br>
+    <input class='address_field' name="address[zip_code]" placeholder="Zip Code" </input><br>
+    <input class='address_field' name="address[country]" placeholder="country" </input><br>
+    <input name="address[user_id]" type="hidden" </input><br>
+    <input type="submit" value="Send!">
+  </form>
+<% end %>
 
 
 
