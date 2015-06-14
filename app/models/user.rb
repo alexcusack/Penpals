@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   include BCrypt
   validates :password_hash, :presence => true
   validates :username, :presence => true
+  validates :username, :uniqueness => true
   has_many :notes
   has_one :reciever
 
