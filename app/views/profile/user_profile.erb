@@ -16,22 +16,35 @@
 </ol>
 
 
-<h[2>Your address information</h2>
+<h2>Your address information</h2>
 <% address = Receiver.where(user_id: @current_user.id).first %>
+<% if address %>
+  <form id="new_note" action="/updateaddress" method="POST">
+      <input name="_method" type="hidden" value="put" />
+      <input class='address_field' name="address[street_address]" value="<%= address.street_address %>"</input>
+      <input class='address_field' name="address[street_name]" value="<%= address.street_name %>"</input>
+      <input class='address_field' name="address[city]" value="<%= address.city%>"</input>
+      <input class='address_field' name="address[state]" value="<%= address.state %>"</input>
+      <input class='address_field' name="address[zip_code]" value="<%= address.zip_code %>"</input>
+      <input class='address_field' name="address[country]" value="<%= address.country %>"</input>
+      <input name="address[user_id]" type="hidden" value="<%= @current_user.id %>" /><br>
 
-<form id="new_note" action="/updateaddress" method="POST">
+      <input type="submit" value="Update">
+    </form>
+<% else %>
+ <form id="new_note" action="/updateaddress" method="POST">
     <input name="_method" type="hidden" value="put" />
-    <input class='address_field' name="address[street_address]" value="<%= address.street_address %>"</input>
-    <input class='address_field' name="address[street_name]" value="<%= address.street_name %>"</input>
-    <input class='address_field' name="address[city]" value="<%= address.city%>"</input>
-    <input class='address_field' name="address[state]" value="<%= address.state %>"</input>
-    <input class='address_field' name="address[zip_code]" value="<%= address.zip_code %>"</input>
-    <input class='address_field' name="address[country]" value="<%= address.country %>"</input>
-    <input name="address[user_id]" type="hidden" value="<%= @current_user.id %>" /><br>
+    <input class='address_field' name="address[street_address]" </input>
+    <input class='address_field' name="address[street_name]" </input>
+    <input class='address_field' name="address[city]" </input>
+    <input class='address_field' name="address[state]" </input>
+    <input class='address_field' name="address[zip_code]" </input>
+    <input class='address_field' name="address[country]" </input>
+    <input name="address[user_id]" type="hidden" value="#session[:user_id]"</input>
 
-    <input type="submit" value="Update">
+    <input type="submit" value="Add Address">
   </form>
-
+  <% end %>
 
 <p><a href="/logout">Logout</a></p><br>
 </div>

@@ -1,6 +1,6 @@
 <div style="width:800px; margin:0 auto;">
 <%if session[:user_id] %>
-  <h1>Welcome back, <%= @current_user.username %></h1>
+  <h1>Welcome, <%= @current_user.username %></h1>
   <p id="profile_link"><a href="/profile/<%= @current_user.id %>">Go to my profile</a></p>
   <% else %>
    <p><a href="/login">Login</a></p>
@@ -39,6 +39,7 @@
   </form>
 <% end %>
   </div>
+<p><a href="/logout">Logout</a></p><br>
 </div>
 
 
