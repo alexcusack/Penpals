@@ -1,6 +1,5 @@
 <% if @errors %>
-  <%= p "That didn't work..." %>
-  <%= @errors.each{|error| p error} %>
+  <%= @errors %>
 <% end  %>
 <h3>Login</h3>
 <form action="/login" method="post">

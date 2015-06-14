@@ -17,7 +17,8 @@ post '/login' do
     redirect '/'
   else
     p "[LOG] Authentication failed"
-    redirect '/'
+    @errors = "be sure your username and password are correct"
+    erb :'homepage/login_signup'
   end
 end
 
@@ -80,16 +81,16 @@ delete '/delete/:note_id' do
 end
 
 put '/updateaddress' do
-p "[LOG] hit address route"
+  p "[LOG] hit address route"
  new_address = Receiver.where(user_id: session[:user_id]).first
-p "#{session[:user_id]}"
-p "#{new_address}"
+  p "#{session[:user_id]}"
+  p "#{new_address}"
  if new_address
   p "[LOG] address found"
   new_address.update_attributes(params[:address])
   redirect ("/profile/#{session[:user_id]}")
   else
-  p "[LOG] you messed it up....."
+  p "[LOG] Address was not found"
   redirect ("/profile/#{session[:user_id]}")
   end
 end

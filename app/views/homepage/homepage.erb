@@ -1,21 +1,20 @@
-<h1>Welcome to Notes</h1>
+<div style="width:800px; margin:0 auto;">
 <%if session[:user_id] %>
   <h1>Welcome back, <%= @current_user.username %></h1>
-  <a href="/profile/<%= @current_user.id %>">Go to my profile</a>
+  <p id="profile_link"><a href="/profile/<%= @current_user.id %>">Go to my profile</a></p>
   <% else %>
-   <p><a href="">Login</a></p>
+   <p><a href="/login">Login</a></p>
 <% end %>
 <br>
 <% if @errors %>
 <%= @errors %>
 <% end %>
-
 <h3>Want to write a new note?</h3>
-
+  <div class="address form">
 <% address = Receiver.where(user_id: @current_user.id).first %>
 <% if address %>
   <form id="new_note" action="/notes" method="post">
-    <textarea class='note_form' name="message" placeholder="Write a note"></textarea>
+    <textarea class="note_form" name="message" placeholder="Write a note"></textarea>
     <p> Your address</p>
     <input class='address_field' name="address[street_address]" placeholder="1234" value="<%= address.street_address %>"</input><br>
     <input class='address_field' name="address[street_name]" placeholder="Street Name" value="<%= address.street_name %>"</input><br>
@@ -39,7 +38,8 @@
     <input type="submit" value="Send!">
   </form>
 <% end %>
-
+  </div>
+</div>
 
 
 
