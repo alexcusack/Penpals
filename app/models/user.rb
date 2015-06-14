@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   include BCrypt
   validates :password_hash, :presence => true
   has_many :notes
+  has_one :reciever
 
   def self.authenticate(username, entered_password)
     user = User.where(username: username).first
