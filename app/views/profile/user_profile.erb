@@ -1,0 +1,37 @@
+<div style="width:800px; margin:0 auto;">
+<h1>Profile</h1><a href="/">Home</a>
+<h2>User: <%= @current_user.username %> </h2>
+<h3>Total notes sent: <%= @current_user.notes.count %></h3>
+
+<h4>Here are the notes you've sent</h4>
+<ol>
+  <% @notes.each do |note| %>
+    <li><%= p note.message %>
+      <form action="/delete/<%= note.id %>" method="POST">
+        <input name="_method" type="hidden" value="delete" />
+        <input type="submit" value="delete">
+      </form>
+    </li>
+  <% end  %>
+</ol>
+
+
+<h[2>Your address information</h2>
+<% address = Receiver.where(user_id: @current_user.id).first %>
+
+<form id="new_note" action="/updateaddress" method="POST">
+    <input name="_method" type="hidden" value="put" />
+    <input class='address_field' name="address[street_address]" value="<%= address.street_address %>"</input>
+    <input class='address_field' name="address[street_name]" value="<%= address.street_name %>"</input>
+    <input class='address_field' name="address[city]" value="<%= address.city%>"</input>
+    <input class='address_field' name="address[state]" value="<%= address.state %>"</input>
+    <input class='address_field' name="address[zip_code]" value="<%= address.zip_code %>"</input>
+    <input class='address_field' name="address[country]" value="<%= address.country %>"</input>
+    <input name="address[user_id]" type="hidden" value="<%= @current_user.id %>" /><br>
+
+    <input type="submit" value="Update">
+  </form>
+
+
+<p><a href="/logout">Logout</a></p><br>
+</div>

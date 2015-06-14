@@ -1,0 +1,45 @@
+<div style="width:800px; margin:0 auto;">
+<%if session[:user_id] %>
+  <h1>Welcome back, <%= @current_user.username %></h1>
+  <p id="profile_link"><a href="/profile/<%= @current_user.id %>">Go to my profile</a></p>
+  <% else %>
+   <p><a href="/login">Login</a></p>
+<% end %>
+<br>
+<% if @errors %>
+<%= @errors %>
+<% end %>
+<h3>Want to write a new note?</h3>
+  <div class="address form">
+<% address = Receiver.where(user_id: @current_user.id).first %>
+<% if address %>
+  <form id="new_note" action="/notes" method="post">
+    <textarea class="note_form" name="message" placeholder="Write a note"></textarea>
+    <p> Your address</p>
+    <input class='address_field' name="address[street_address]" placeholder="1234" value="<%= address.street_address %>"</input><br>
+    <input class='address_field' name="address[street_name]" placeholder="Street Name" value="<%= address.street_name %>"</input><br>
+    <input class='address_field' name="address[city]" placeholder="City" value="<%= address.city%>" </input><br>
+    <input class='address_field' name="address[state]" placeholder="State" value="<%= address.state %>" </input><br>
+    <input class='address_field' name="address[zip_code]" placeholder="Zip Code" value="<%= address.zip_code %>" </input><br>
+    <input class='address_field' name="address[country]" placeholder="country" value="<%= address.country %>" </input><br>
+    <input type="submit" value="Send!">
+  </form>
+<% else %>
+  <form id="new_note" action="/notes" method="post">
+    <textarea class='note_form' name="message" placeholder="Write a note"></textarea>
+    <p> Your address</p>
+    <input class='address_field' name="address[street_address]" placeholder="1234" </input><br>
+    <input class='address_field' name="address[street_name]" placeholder="Street Name" </input><br>
+    <input class='address_field' name="address[city]" placeholder="City" </input><br>
+    <input class='address_field' name="address[state]" placeholder="State" </input><br>
+    <input class='address_field' name="address[zip_code]" placeholder="Zip Code" </input><br>
+    <input class='address_field' name="address[country]" placeholder="country" </input><br>
+    <input name="address[user_id]" type="hidden" </input><br>
+    <input type="submit" value="Send!">
+  </form>
+<% end %>
+  </div>
+</div>
+
+
+

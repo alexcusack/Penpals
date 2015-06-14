@@ -1,0 +1,45 @@
+#Notes
+1 Week project
+Goal is to get MVP of site up not including the API integration
+## Send notes
+
+## User stories
+# As a user, I want to be able to create a new note and have it sent
+# As a user, I want to recieve a random note
+# As a user, I want to see a log of the notes I've sent
+# As a user, I want to be able to see notes other people have recieved (images)
+# As a user, I want to be able to delete my account and associated messages
+
+
+## Flow
+# User lands on homepage and is met with a field to start writing a note
+# User adds their address
+# User submits note and has option to create an account (and see the note to their message log)
+#   address is saved on submission regardless of account creation
+
+# User can log into account
+# User can see their sent notes
+# User delete their account and associated notes log
+# User can create new notes (without having to repopulate address information)
+
+## Stretch goal
+# User can upload a photo to the public photo stream of the note they recieved
+
+
+## Pseudocode notes
+# (see schema for db design)
+# Homepage renders differently depending on logged in status
+# On note submission, the user's address is saved to the recieving address DB
+# Address are pulled from the RecieverAddresses table at random when a new note is created
+#
+
+
+
+
+
+
+
+
+
+
+
