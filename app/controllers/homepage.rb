@@ -64,6 +64,7 @@ post '/notes' do
   end
 end
 
+
 get '/notes/:id' do
   p "[LOG] you've reached /notes/:id"
   p "[LOG] your params are: #{params.inspect}"
