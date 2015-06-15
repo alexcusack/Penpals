@@ -17,7 +17,7 @@ post '/login' do
     redirect '/'
   else
     p "[LOG] Authentication failed"
-    @errors = "be sure your username and password are correct"
+    @errors = ["be sure your username and password are correct"]
     erb :'homepage/login_signup'
   end
 end
