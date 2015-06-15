@@ -69,7 +69,7 @@ get '/notes/:id' do
   p "[LOG] you've reached /notes/:id"
   p "[LOG] your params are: #{params.inspect}"
   @note = Note.find(params[:id])
-  erb :"note/note_confirmation"
+  erb :"/note/note_confirmation"
 end
 
 delete '/delete/:note_id' do
@@ -103,7 +103,7 @@ get '/profile/:user_profile' do
   if @current_user && @current_user.id == session[:user_id]
     p "[LOG] user verifed as logged in user"
     @notes = @current_user.notes
-    erb :"profile/user_profile"
+    erb :"/profile/user_profile"
   else
     p "[LOG] user not authenticated to view profile"
   end
