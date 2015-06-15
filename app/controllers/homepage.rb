@@ -69,7 +69,8 @@ get '/notes/:id' do
   p "[LOG] you've reached /notes/:id"
   p "[LOG] your params are: #{params.inspect}"
   @note = Note.find(params[:id])
-  erb :"/note/note_confirmation"
+  redirect ("/profile/#{session[:user_id]}")
+  # erb :"/note/note_confirmation"
 end
 
 delete '/delete/:note_id' do
